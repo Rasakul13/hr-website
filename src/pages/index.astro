@@ -9,7 +9,7 @@ import Symbol from '../components/Symbol.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Testimonial from '../components/Testimonial.astro';
 import glitzer from '../assets/images/glitzer.jpg';
-import heidi from '../assets/images/heidi.png';
+import introBild from '../assets/images/intro-licht.png';
 import { mailto, site } from '../data/site';
 import { testimonials } from '../data/content';
 
@@ -56,10 +56,9 @@ const quotes = testimonials.filter((t) => !t.hidden).slice(0, 3);
   <section class="section bg-cream">
     <div class="container intro-grid">
       <div class="portrait">
-        <Image src={heidi} alt="Heidi Rast" widths={[320, 640]} sizes="(max-width: 820px) 70vw, 380px" />
+        <Image src={introBild} alt="Frau mit geschlossenen Augen in hellem, warmem Licht" />
       </div>
       <div class="stack">
-        <p class="kicker">Über mich</p>
         <h2 class="intro-title">
           Spürst Du, dass etwas blockiert ist
           <span class="intro-sub">– in Deinem Leben, Deinem Business oder Deinen Beziehungen?</span>
@@ -228,8 +227,11 @@ const quotes = testimonials.filter((t) => !t.hidden).slice(0, 3);
   }
 
   .portrait :global(img) {
+    display: block;
     width: 100%;
-    border-radius: 50%;
+    height: auto;
+    border-radius: var(--radius);
+    box-shadow: 0 16px 40px rgba(18, 54, 60, 0.09);
   }
 
   .intro-title {
