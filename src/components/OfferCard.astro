@@ -118,14 +118,18 @@ const external = offer.cta.href.startsWith('http');
     color: var(--on-dark-soft);
   }
 
+  /* Spruch links, Buchen-Button immer rechts – auch wenn der Spruch zweizeilig ist */
   .offer-foot {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    justify-content: space-between;
     gap: 16px 24px;
     padding-top: 20px;
     border-top: 1px solid var(--gold-line);
+  }
+
+  .offer-foot .btn {
+    justify-self: end;
   }
 
   .offer-claim {
@@ -134,6 +138,12 @@ const external = offer.cta.href.startsWith('http');
     font-size: 22px;
     line-height: 1.3;
     max-width: 460px;
+  }
+
+  @media (max-width: 520px) {
+    .offer-foot {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 
   @media (max-width: 760px) {

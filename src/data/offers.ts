@@ -94,7 +94,7 @@ export const offers: Offer[] = [
       'Alle Themen und Beschwerden',
     ],
     claim: 'Nutze Heidis gesamtes Wissen und Können als Schlüssel zur Veränderung.',
-    cta: { label: 'Heilsession buchen', href: 'https://heidisshop.tentary.com/p/f3fyoz' },
+    cta: { label: 'Buchen', href: 'https://heidisshop.tentary.com/p/f3fyoz' },
   },
   {
     id: 'body-code',
@@ -111,7 +111,7 @@ export const offers: Offer[] = [
       'Geld- & Erfolgsblockaden',
     ],
     claim: 'Alte Muster auflösen und spürbar freier fühlen.',
-    cta: { label: 'Session buchen', href: 'https://heidisshop.tentary.com/p/d53uP0' },
+    cta: { label: 'Buchen', href: 'https://heidisshop.tentary.com/p/d53uP0' },
   },
   {
     id: 'watteheilung',
@@ -146,7 +146,7 @@ export const offers: Offer[] = [
       'Verjüngung & energetisches Gleichgewicht',
     ],
     claim: 'Erlebe tiefe Regeneration auf allen Ebenen.',
-    cta: { label: 'Anwendung buchen', href: 'https://heidisshop.tentary.com/p/PLUTZz' },
+    cta: { label: 'Buchen', href: 'https://heidisshop.tentary.com/p/PLUTZz' },
   },
   {
     id: 'decrees',
@@ -164,7 +164,7 @@ export const offers: Offer[] = [
       'Körperliche Themen wirkungsvoll auflösen',
     ],
     claim: 'Erlebe, wie schnell Transformation geschehen kann.',
-    cta: { label: 'Jetzt buchen', href: 'https://heidisshop.tentary.com/p/QjIzpx' },
+    cta: { label: 'Buchen', href: 'https://heidisshop.tentary.com/p/QjIzpx' },
   },
   {
     id: 'light-key-healing',
@@ -182,6 +182,6 @@ export const offers: Offer[] = [
       'Aktivierung der Selbstheilungskräfte',
     ],
     claim: 'Erlebe die Kraft der Heilfrequenzen.',
-    cta: { label: 'Anwendung buchen', href: 'https://heidisshop.tentary.com/p/q4yeQH' },
+    cta: { label: 'Buchen', href: 'https://heidisshop.tentary.com/p/q4yeQH' },
   },
 ];
