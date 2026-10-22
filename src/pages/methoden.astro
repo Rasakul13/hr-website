@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Symbol from '../components/Symbol.astro';
+import { methodGroups } from '../data/content';
+import { mailto } from '../data/site';
+---
+
+<BaseLayout title="Methoden" description="Body Code, Heilfrequenzen, Reiki, Watteheilung, Decrees, Light Keys und mehr – die Methoden von Heidi Rast.">
+  <PageHero
+    kicker="Methoden"
+    title="Deine Begleitung auf dem Weg zu mehr Leichtigkeit, Heilung und innerer Entfaltung"
+  />
+
+  <section class="section bg-cream">
+    <div class="container narrow stack">
+      <h2>Manchmal braucht es nur einen Impuls, um <em>Blockaden zu lösen</em></h2>
+      <p>
+        Ruft das Leben Dich dazu auf, neue Wege der Heilung zu beschreiten? Ich begleite Dich energetisch – ob für Dich
+        selbst, Deinen Körper, Deine Beziehungen, Dein Business oder ein Herzensprojekt.
+      </p>
+      <p>
+        Dabei schöpfe ich aus einem reichen Schatz kraftvoller energetischer Methoden, die Dich unterstützen, Blockaden
+        zu lösen, Deine Schwingung anzuheben und neue Möglichkeiten zu erschaffen.
+      </p>
+      <p>
+        Ursprünglich habe ich mit Kinesiologie begonnen und diese Methode sogar unterrichtet. Das war der Anfang einer
+        langen Reise, denn schon bald kamen Reiki und Chakrenbalance sowie Wirbelsäulenaufrichtung dazu. Als ich spürte,
+        was ich verändern konnte, und begeisterte Rückmeldungen erhielt, lernte ich immer mehr – heute kommt mein reicher
+        Erfahrungs- und Wissensschatz DIR zugute!
+      </p>
+      <p class="muted">Hier ein Überblick über die Methoden, die ich individuell für Dich auswähle und kombiniere:</p>
+    </div>
+  </section>
+
+  {
+    methodGroups.map((group, i) => (
+      <section class:list={['section', i % 2 === 0 ? 'bg-petrol' : 'bg-paper']}>
+        <div class="container group">
+          <div class="group-head stack">
+            <span class="group-symbol">
+              <Symbol name={group.symbol} size={72} />
+            </span>
+            <h2>{group.title}</h2>
+          </div>
+          <div class="methods">
+            {group.methods.map((m) => (
+              <article class:list={['method', i % 2 === 0 ? 'card-dark' : 'card']}>
+                <h3>{m.name}</h3>
+                {'source' in m && m.source && <p class="source">{m.source}</p>}
+                <p class="method-text">{m.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    ))
+  }
+
+  <CtaBand
+    title="Deine Veränderung beginnt hier – mit mir!"
+    text="Ob du mehr Leichtigkeit in Deinem Leben spüren möchtest, alte Themen heilen, neue Ziele erreichen oder einfach Deinem inneren Ruf folgen willst – ich bin da, um Dich auf dieser Reise zu begleiten. Lass uns gemeinsam die Türen öffnen zu den Möglichkeiten, die auf Dich warten."
+    primary={{ label: 'Zu den Angeboten', href: '/angebote/' }}
+    secondary={{ label: 'Hilfe bei der Auswahl', href: mailto }}
+  />
+</BaseLayout>
+
+<style>
+  /* Icon und Titel links, wandern beim Scrollen mit */
+  .group {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: start;
+  }
+
+  .group-head {
+    position: sticky;
+    top: 32px;
+  }
+
+  /* so bemessen, dass „Energiebewusstseinsarbeit“ ohne Trennung in die Spalte passt */
+  .group-head h2 {
+    font-size: clamp(24px, 2.3vw, 34px);
+  }
+
+  .group-symbol {
+    display: inline-flex;
+    width: 104px;
+    height: 104px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--gold-line);
+    background: var(--petrol);
+  }
+
+  .bg-petrol .group-symbol {
+    background: var(--petrol-soft);
+  }
+
+  .methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 18px;
+  }
+
+  .method {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* weiße Karten: dezenter Goldrand wie auf „Über mich“ */
+  .method.card {
+    border: 1px solid var(--gold-line);
+  }
+
+  .method h3 {
+    font-size: clamp(21px, 6vw, 25px);
+  }
+
+  .source {
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: var(--gold-ink);
+  }
+
+  .card-dark .source {
+    color: var(--gold);
+  }
+
+  .method-text {
+    font-size: 16px;
+    color: var(--ink-soft);
+  }
+
+  .card-dark .method-text {
+    color: var(--on-dark-soft);
+  }
+
+  @media (max-width: 860px) {
+    .group {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .group-head {
+      position: static;
+    }
+
+    .group-head h2 {
+      font-size: clamp(26px, 7vw, 36px);
+    }
+  }
+</style>

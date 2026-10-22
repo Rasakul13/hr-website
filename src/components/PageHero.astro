@@ -1,0 +1,102 @@
+---
+// Petrol-Kopfbereich für Unterseiten: Text links, Mandala rechts in eigener Spalte
+import { Image } from 'astro:assets';
+import glitzer from '../assets/images/glitzer.jpg';
+import Bokeh from './Bokeh.astro';
+import Mandala from './Mandala.astro';
+
+interface Props {
+  kicker?: string;
+  title: string;
+  titleEm?: string;
+  lead?: string;
+  compact?: boolean;
+}
+
+const { kicker, title, titleEm, lead, compact = false } = Astro.props;
+---
+
+<section class:list={['page-hero bg-petrol', { compact }]}>
+  <Image src={glitzer} alt="" class="hero-glitter" widths={[800, 1600]} sizes="100vw" loading="eager" />
+  <Bokeh />
+  <div class="container hero-grid">
+    <div class="hero-text stack">
+      {kicker && <p class="kicker">{kicker}</p>}
+      <h1>
+        {title}
+        {titleEm && <em>{titleEm}</em>}
+      </h1>
+      {lead && <p class="lead muted">{lead}</p>}
+      <slot />
+    </div>
+    {
+      !compact && (
+        <div class="hero-mandala">
+          <Mandala spin />
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(56px, 8vw, 110px);
+  }
+
+  .page-hero.compact {
+    padding-block: clamp(48px, 6vw, 80px);
+  }
+
+  .page-hero :global(.hero-glitter) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.16;
+  }
+
+  .hero-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.8fr);
+    align-items: center;
+    gap: clamp(32px, 6vw, 80px);
+  }
+
+  .compact .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-text {
+    max-width: 720px;
+  }
+
+  h1 {
+    font-size: clamp(30px, 5vw, 66px);
+  }
+
+  h1 em {
+    display: block;
+  }
+
+  .hero-mandala {
+    width: 100%;
+    max-width: 380px;
+    justify-self: end;
+    opacity: 0.9;
+  }
+
+  @media (max-width: 820px) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hero-mandala {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,143 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Symbol from '../components/Symbol.astro';
+import ablaufImg from '../assets/images/ablauf.jpg';
+import { mailto, site } from '../data/site';
+---
+
+<BaseLayout title="Ablauf & Buchung" description="So funktionieren die energetischen Fernsessions von Heidi Rast – mit und ohne Termin, sowie digitale Produkte zur Selbstnutzung.">
+  <PageHero
+    kicker="Ablauf & Buchung"
+    title="So funktioniert meine energetische Arbeit"
+    lead="Die meisten meiner energetischen Sessions führe ich als Fernbehandlung ohne persönlichen Termin durch. Zusätzlich biete ich ausgewählte Anwendungen mit Termin sowie digitale Produkte und energetische Anwendungen zur selbstständigen Nutzung an. So kannst du genau die Form der Unterstützung wählen, die für dich und deinen Alltag am besten passt."
+  />
+
+  <section class="section bg-cream">
+    <div class="container ways">
+      <article class="card way">
+        <span class="way-symbol"><Symbol name="circles" size={64} /></span>
+        <h2>Individuelle Fernsessions ohne Termin</h2>
+        <p>Nach deiner Buchung benötige ich einige Informationen zu deinem Anliegen. Diese kannst du mir ganz einfach per E-Mail übermitteln.</p>
+        <p>Für die Fernsession musst du keinen Termin freihalten und nicht bewusst anwesend sein.</p>
+        <p>Nach der Anwendung erhältst du von mir einen E-Mail-Report mit Informationen zur Session, den eingesetzten Methoden und den bearbeiteten Themen. Je nach Anwendung kann dieser auch ergänzende Empfehlungen oder Hinweise enthalten.</p>
+      </article>
+
+      <article class="card way">
+        <span class="way-symbol"><Symbol name="sun" size={64} /></span>
+        <h2>Fernsessions mit persönlichem Kontakt</h2>
+        <p>Nur bei ausgewählten Angeboten findet die Session nach vorheriger Terminvereinbarung statt – telefonisch oder über Zoom. Ob ein persönlicher Termin vorgesehen oder möglich ist, findest du direkt in der jeweiligen Angebotsbeschreibung.</p>
+        <p>Auch bei diesen Sessions können weitere energetische Anwendungen ohne direkten Kontakt ergänzend eingesetzt werden.</p>
+        <p>Bei einigen Anwendungen – wie z.&nbsp;B. Reiki – vereinbaren wir einen Termin, an dem du es dir in ruhiger Atmosphäre bequem machen solltest. Du bekommst dann zu Beginn und nach Abschluss eine SMS von mir.</p>
+      </article>
+
+      <article class="card way">
+        <span class="way-symbol"><Symbol name="flower" size={64} /></span>
+        <h2>Digitale Produkte und Anwendungen zur Selbstnutzung</h2>
+        <p>In meinem Shop findest du zunehmend Audios und energetische Anwendungen, die du selbstständig nutzen kannst. Dazu gehören beispielsweise:</p>
+        <ul class="sparkle-list">
+          <li>Audios zur Entspannung und emotionalen Unterstützung</li>
+          <li>jederzeit abrufbare energetische Fernanwendungen</li>
+          <li>individuell gestaltete Heilungsräume</li>
+          <li>Anwendungen mit Heilfrequenzen, Heilsymbolen, Heilzahlen oder Healing Codes</li>
+        </ul>
+        <p>Nach dem Kauf erhältst du per E-Mail entweder das digitale Produkt oder eine genaue Anleitung zur Aktivierung und Anwendung.</p>
+        <p>Viele dieser Angebote kannst du ohne Termin nutzen – wann immer du Unterstützung brauchst und, je nach Produkt, auch mehrmals oder regelmäßig.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section bg-paper">
+    <div class="container booking">
+      <Image src={ablaufImg} alt="Entspannte Frau mit geschlossenen Augen" widths={[400, 800]} sizes="(max-width: 820px) 80vw, 420px" class="booking-img" />
+      <div class="stack">
+        <p class="kicker">Buchung</p>
+        <h2>Buchung und Auswahl</h2>
+        <p>
+          Du kannst deine gewünschte Session oder dein digitales Produkt direkt über meinen Shop buchen. Wenn du unsicher
+          bist, welches Angebot zu deinem Anliegen passt, kannst du mir gerne vorab eine E-Mail schreiben.
+        </p>
+        <div class="btn-row">
+          <a href={site.shop} class="btn btn-petrol" rel="noopener">Zu meinem Shop</a>
+          <a href={mailto} class="btn btn-outline">E-Mail schreiben</a>
+        </div>
+        <p class="notice">
+          <strong>Bitte beachte:</strong> Meine Angebote dienen der energetischen Unterstützung und ersetzen keine
+          ärztliche Diagnose oder Behandlung, keine Psychotherapie und keine verordneten Medikamente. Bei gesundheitlichen
+          Beschwerden wende dich bitte an eine Ärztin, einen Arzt oder eine entsprechend qualifizierte Fachperson.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .ways {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    align-items: start;
+  }
+
+  .way {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: clamp(26px, 3vw, 36px);
+    font-size: 17px;
+  }
+
+  .way h2 {
+    font-size: clamp(26px, 2.6vw, 32px);
+  }
+
+  .way-symbol {
+    display: inline-flex;
+    width: 88px;
+    height: 88px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--petrol);
+    margin-bottom: 6px;
+  }
+
+  .way .sparkle-list {
+    font-size: 16px;
+  }
+
+  .booking {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: clamp(32px, 6vw, 80px);
+  }
+
+  .booking :global(.booking-img) {
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 50%;
+    justify-self: center;
+    border: 1px solid var(--gold-line);
+    padding: 10px;
+  }
+
+  .notice {
+    margin-top: 12px;
+    padding: 20px 24px;
+    border: 1px solid var(--gold-line);
+    border-radius: 18px;
+    background: var(--cream);
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 820px) {
+    .booking {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

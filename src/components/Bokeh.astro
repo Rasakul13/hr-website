@@ -1,0 +1,77 @@
+---
+// Türkise Lichtkreise und Funkelsterne – angelehnt an das Original-Hintergrundbild
+import Sparkle from './Sparkle.astro';
+
+interface Props {
+  mirror?: boolean;
+}
+
+const { mirror = false } = Astro.props;
+
+const circles = [
+  { x: 6, y: 18, s: 90, o: 0.22, b: 4 },
+  { x: 30, y: 72, s: 140, o: 0.12, b: 8 },
+  { x: 46, y: 10, s: 46, o: 0.28, b: 2 },
+  { x: 2, y: 80, s: 60, o: 0.18, b: 3 },
+  { x: 88, y: 76, s: 110, o: 0.1, b: 6 },
+];
+
+// Sterne nur an den Rändern, damit sie nicht hinter Text liegen
+const stars = [
+  { x: 2, y: 10, s: 22, c: '#ffffff', o: 0.85 },
+  { x: 1.5, y: 88, s: 13, c: '#ffffff', o: 0.7 },
+  { x: 55, y: 92, s: 17, c: '#e6cc8f', o: 0.8 },
+  { x: 96, y: 8, s: 15, c: '#ffffff', o: 0.65 },
+];
+
+const pos = (x: number) => (mirror ? `right: ${x}%` : `left: ${x}%`);
+---
+
+<div class="bokeh" aria-hidden="true">
+  {
+    circles.map((c) => (
+      <span
+        class="bokeh-dot"
+        style={`${pos(c.x)}; top: ${c.y}%; width: ${c.s}px; height: ${c.s}px; opacity: ${c.o}; filter: blur(${c.b}px)`}
+      />
+    ))
+  }
+  {
+    stars.map((s) => (
+      <span class="bokeh-star" style={`${pos(s.x)}; top: ${s.y}%; opacity: ${s.o}`}>
+        <Sparkle size={s.s} color={s.c} />
+      </span>
+    ))
+  }
+</div>
+
+<style>
+  .bokeh {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .bokeh-dot {
+    position: absolute;
+    border-radius: 50%;
+    background: rgb(110, 220, 232);
+  }
+
+  .bokeh-star {
+    position: absolute;
+    animation: twinkle 6s ease-in-out infinite;
+  }
+
+  .bokeh-star:nth-child(odd) {
+    animation-delay: -3s;
+  }
+
+  @keyframes twinkle {
+    50% {
+      transform: scale(0.7);
+      opacity: 0.35;
+    }
+  }
+</style>

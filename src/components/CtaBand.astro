@@ -1,0 +1,73 @@
+---
+import { url } from '../utils/url';
+// Abschluss-Band: Original-Glitzerbild, Mandala, ein klarer Aufruf
+import { Image } from 'astro:assets';
+import glitzer from '../assets/images/glitzer.jpg';
+import Mandala from './Mandala.astro';
+
+interface Link {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  text?: string;
+  primary: Link;
+  secondary?: Link;
+}
+
+const { title, text, primary, secondary } = Astro.props;
+const external = (href: string) => href.startsWith('http');
+---
+
+<section class="cta bg-petrol">
+  <Image src={glitzer} alt="" class="cta-glitter" widths={[800, 1600]} sizes="100vw" />
+  <div class="cta-mandala" aria-hidden="true"><Mandala spin /></div>
+  <div class="container narrow stack center cta-inner">
+    <h2>{title}</h2>
+    {text && <p class="muted lead">{text}</p>}
+    <div class="btn-row">
+      <a href={url(primary.href)} class="btn btn-gold" rel={external(primary.href) ? 'noopener' : undefined}>{primary.label}</a>
+      {
+        secondary && (
+          <a href={url(secondary.href)} class="btn btn-ghost" rel={external(secondary.href) ? 'noopener' : undefined}>
+            {secondary.label}
+          </a>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(72px, 10vw, 128px);
+  }
+
+  .cta :global(.cta-glitter) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 60%;
+    opacity: 0.4;
+  }
+
+  .cta-mandala {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(620px, 120vw);
+    transform: translate(-50%, -50%);
+    opacity: 0.22;
+    pointer-events: none;
+  }
+
+  .cta-inner {
+    position: relative;
+  }
+</style>

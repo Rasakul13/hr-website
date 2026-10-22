@@ -1,0 +1,119 @@
+---
+import { url } from '../utils/url';
+import { Image } from 'astro:assets';
+import logo from '../assets/images/logo.png';
+import Mandala from './Mandala.astro';
+import { legalNav, mailto, nav, site } from '../data/site';
+---
+
+<footer class="site-footer bg-deep">
+  <div class="footer-mandala" aria-hidden="true"><Mandala /></div>
+  <div class="container footer-grid">
+    <div class="footer-brand stack">
+      <Image src={logo} alt="Heidi Rast – Magische Heilerin" width={96} height={96} class="footer-logo" />
+      <p class="muted">{site.tagline}.</p>
+    </div>
+
+    <nav aria-label="Seiten" class="footer-col">
+      <p class="kicker">Seiten</p>
+      <ul>
+        {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        <li><a href={url("/ueber-mich/buecher/")}>Meine Bücher</a></li>
+      </ul>
+    </nav>
+
+    <div class="footer-col">
+      <p class="kicker">Kontakt</p>
+      <ul>
+        <li><a href={mailto}>{site.email}</a></li>
+        <li><a href={site.telegram} rel="noopener">Telegramgruppe</a></li>
+        <li><a href={site.shop} rel="noopener">Onlineshop</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <span>© {new Date().getFullYear()} Heidi Rast · Energetik</span>
+    <nav aria-label="Rechtliches">
+      <ul>
+        {legalNav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    position: relative;
+    overflow: hidden;
+    padding-top: clamp(56px, 8vw, 88px);
+    border-top: 1px solid var(--gold-line);
+  }
+
+  .footer-mandala {
+    position: absolute;
+    right: -140px;
+    top: -120px;
+    width: 420px;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+
+  .footer-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    padding-bottom: 48px;
+  }
+
+  .footer-brand :global(.footer-logo) {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+  }
+
+  .footer-col ul,
+  .footer-bottom ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .footer-col ul {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .footer-col a,
+  .footer-bottom a {
+    color: var(--on-dark-soft);
+    text-decoration: none;
+    font-size: 16px;
+  }
+
+  .footer-col a:hover,
+  .footer-bottom a:hover {
+    color: var(--gold-light);
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px 24px;
+    padding-block: 22px 28px;
+    border-top: 1px solid rgba(205, 170, 94, 0.22);
+    font-size: 14px;
+    color: var(--on-dark-soft);
+  }
+
+  .footer-bottom ul {
+    display: flex;
+    gap: 20px;
+  }
+</style>

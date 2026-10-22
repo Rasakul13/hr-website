@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { mailto, site } from '../data/site';
+---
+
+<BaseLayout title="Datenschutz">
+  <PageHero kicker="Rechtliches" title="Datenschutzerklärung" compact />
+
+  <section class="section bg-paper">
+    <div class="container narrow prose">
+      <p class="draft">
+        <strong>Entwurf – vor dem Livegang prüfen lassen.</strong> Die alte Datenschutzerklärung wurde von Jimdo erzeugt
+        und passt nicht zur neuen Website. Dieser Entwurf beschreibt die neue, cookiefreie Seite und ersetzt keine
+        Rechtsberatung.
+      </p>
+
+      <h2>Verantwortliche</h2>
+      <p>
+        Heidi Rast, Energetiker<br />
+        Eichbachgasse 49, 1140 Wien, Österreich<br />
+        E-Mail: <a href={mailto}>{site.email}</a>
+      </p>
+
+      <h2>Hosting</h2>
+      <p>
+        Diese Website wird bei der netcup GmbH, Daimlerstraße 25, 76185 Karlsruhe, Deutschland, gehostet. Beim Aufruf
+        der Seite verarbeitet der Server technisch notwendige Daten (z. B. IP-Adresse, Datum und Uhrzeit, aufgerufene
+        Seite, Browser) in Server-Logfiles. Rechtsgrundlage ist unser berechtigtes Interesse an einem sicheren und
+        stabilen Betrieb (Art. 6 Abs. 1 lit. f DSGVO). [Speicherdauer laut netcup-Einstellungen ergänzen]
+      </p>
+
+      <h2>Cookies und Tracking</h2>
+      <p>
+        Diese Website setzt keine Cookies und verwendet keine Analyse- oder Tracking-Dienste. Schriftarten werden lokal
+        vom eigenen Server geladen; es werden keine Daten an Google Fonts übertragen.
+      </p>
+
+      <h2>Kontaktformular und E-Mail</h2>
+      <p>
+        Wenn du mir über das Kontaktformular oder per E-Mail schreibst, verarbeite ich deine Angaben (Name, E-Mail-Adresse,
+        Nachricht), um deine Anfrage zu beantworten (Art. 6 Abs. 1 lit. b DSGVO). Die Nachricht wird per E-Mail an mein
+        Postfach bei Google (Gmail) zugestellt. Die Daten werden gelöscht, sobald sie für die Bearbeitung nicht mehr
+        erforderlich sind und keine gesetzlichen Aufbewahrungspflichten bestehen.
+      </p>
+
+      <h2>Externe Links</h2>
+      <p>
+        Buchungen erfolgen über meinen Onlineshop bei Tentary, Bücher sind über Amazon erhältlich, und die Telegramgruppe
+        wird von Telegram betrieben. Erst wenn du diese Links anklickst, gelten die Datenschutzbestimmungen des jeweiligen
+        Anbieters.
+      </p>
+
+      <h2>Deine Rechte</h2>
+      <p>
+        Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und
+        Widerspruch. Wende dich dazu an <a href={mailto}>{site.email}</a>. Außerdem kannst du dich bei der
+        Österreichischen Datenschutzbehörde (<a href="https://www.dsb.gv.at/" rel="noopener">www.dsb.gv.at</a>)
+        beschweren.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .draft {
+    padding: 18px 22px;
+    border: 1px dashed var(--gold);
+    border-radius: 14px;
+    background: var(--cream);
+    font-size: 16px;
+  }
+</style>

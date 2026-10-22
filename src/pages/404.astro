@@ -1,0 +1,14 @@
+---
+import { url } from '../utils/url';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<BaseLayout title="Seite nicht gefunden">
+  <PageHero kicker="404" title="Diese Seite gibt es nicht (mehr)" lead="Vielleicht hat sie eine neue Adresse bekommen. Hier geht’s weiter:">
+    <div class="btn-row">
+      <a href={url("/")} class="btn btn-gold">Zur Startseite</a>
+      <a href={url("/angebote/")} class="btn btn-ghost">Zu den Angeboten</a>
+    </div>
+  </PageHero>
+</BaseLayout>

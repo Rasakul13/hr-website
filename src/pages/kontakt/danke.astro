@@ -1,0 +1,13 @@
+---
+import { url } from '../../utils/url';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+---
+
+<BaseLayout title="Danke für deine Nachricht">
+  <PageHero kicker="Kontakt" title="Danke für deine Nachricht!" lead="Ich melde mich in der Regel binnen 72 Stunden bei dir. Deine Heidi Rast">
+    <div class="btn-row">
+      <a href={url("/")} class="btn btn-gold">Zur Startseite</a>
+    </div>
+  </PageHero>
+</BaseLayout>

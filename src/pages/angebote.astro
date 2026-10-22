@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import OfferCard from '../components/OfferCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { offers } from '../data/offers';
+import { mailto, site } from '../data/site';
+
+const top = offers.filter((o) => o.top);
+const more = offers.filter((o) => !o.top);
+---
+
+<BaseLayout title="Angebote" description="Heilsession, Intensivbegleitung, Body Code, Watteheilung, Reiki, Decrees und Light Key Healing – die Angebote von Heidi Rast.">
+  <PageHero
+    kicker="Angebote"
+    title="Meine Angebote"
+    lead="Jedes Problem hat eine energetische Ursache – und genau dort setze ich an. Ich arbeite mit einer Vielzahl von Techniken, die ich intuitiv auf Dein Anliegen abstimme. Hier findest Du eine Auswahl meiner Angebote, die tiefgreifende Transformation ermöglichen."
+  >
+    <nav class="jump" aria-label="Angebote auf dieser Seite">
+      {offers.map((o) => <a href={`#${o.id}`}>{o.title}</a>)}
+    </nav>
+  </PageHero>
+
+  <section class="section bg-deep">
+    <div class="container stack">
+      <div class="stack">
+        <p class="kicker">Top-Produkte</p>
+        <h2>Begleitung, die <em>tief geht</em></h2>
+      </div>
+      <div class="list">
+        {top.map((o) => <OfferCard offer={o} dark />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-cream">
+    <div class="container stack">
+      <div class="stack">
+        <p class="kicker">Weitere Produkte</p>
+        <h2>Sessions & Anwendungen</h2>
+      </div>
+      <div class="list">
+        {more.map((o) => <OfferCard offer={o} />)}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Welches Angebot ist das richtige für dich?"
+    text="Jede Sitzung ist individuell – ich wähle intuitiv die für Dich passenden Techniken. Du musst nicht wissen, welche Methode „die beste“ ist – spüre einfach, ob Dich meine Arbeit anspricht, und wir finden gemeinsam den optimalen Weg."
+    primary={{ label: 'Individuelle Heilsession buchen', href: site.heilsession }}
+    secondary={{ label: 'E-Mail schreiben', href: mailto }}
+  />
+</BaseLayout>
+
+<style>
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .jump a {
+    padding: 8px 16px;
+    border: 1px solid var(--gold-line);
+    border-radius: 999px;
+    font-size: 14px;
+    color: var(--on-dark);
+    text-decoration: none;
+  }
+
+  .jump a:hover {
+    border-color: var(--gold);
+    color: var(--gold-light);
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 12px;
+  }
+</style>

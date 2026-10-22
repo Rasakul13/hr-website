@@ -1,0 +1,110 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import physioaustria from '../assets/images/physioaustria.png';
+import { mailto, site } from '../data/site';
+
+// Angaben 1:1 aus heidirast.com/about/
+const energetik = [
+  ['Vollständiger Firmenname', 'Heidi Rast, Energetiker'],
+  ['Ort der Gewerbeberechtigung', 'Eichbachgasse 49, 1140 Wien, Österreich'],
+  ['Rechtsform', 'Einzelunternehmen'],
+  ['Geschäftsführung / juristische Person', 'Heidi Rast'],
+  ['Unternehmensgegenstand', 'Energetiker, gewerblicher Dienstleister'],
+  ['Kammer / Berufsverband-Zugehörigkeit(en)', 'Wirtschaftskammer Wien'],
+  ['Aufsichtsbehörde', 'Magistratisches Bezirksamt für den 14. Bezirk Wien'],
+];
+---
+
+<BaseLayout title="Impressum">
+  <PageHero kicker="Rechtliches" title="Impressum" compact />
+
+  <section class="section bg-paper">
+    <div class="container imprint">
+      <div class="card block stack">
+        <h2>Heidi Rast Energetik</h2>
+        <p>
+          Eichbachgasse 49<br />
+          1140 Wien<br />
+          Mobiltelefon 0676/533 94 74<br />
+          <a href={mailto}>{site.email}</a>
+        </p>
+        <dl>
+          {
+            energetik.map(([term, value]) => (
+              <div>
+                <dt>{term}</dt>
+                <dd>{value}</dd>
+              </div>
+            ))
+          }
+          <div>
+            <dt>Gewerbeordnung</dt>
+            <dd><a href="https://www.ris.bka.gv.at/" rel="noopener">www.ris.bka.gv.at</a></dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="card block stack">
+        <h2>Heidi Rast Physiotherapie</h2>
+        <p>
+          Eichbachgasse 49<br />
+          1140 Wien
+        </p>
+        <p>
+          Passauer Platz 6/7<br />
+          1010 Wien
+        </p>
+        <p>
+          Tel.: +43676/533 94 74<br />
+          E-Mail: <a href={mailto}>{site.email}</a><br />
+          DVR: 4003746
+        </p>
+        <Image src={physioaustria} alt="physioaustria Mitglied" width={180} class="physio" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .imprint {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+    gap: 24px;
+    align-items: start;
+  }
+
+  .block {
+    padding: clamp(26px, 3vw, 40px);
+  }
+
+  h2 {
+    font-size: clamp(28px, 3vw, 36px);
+  }
+
+  dl {
+    margin: 8px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  dt {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-ink);
+  }
+
+  dd {
+    margin: 2px 0 0;
+  }
+
+  .block :global(.physio) {
+    width: 180px;
+    height: auto;
+    margin-top: 8px;
+  }
+</style>

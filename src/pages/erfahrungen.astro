@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Testimonial from '../components/Testimonial.astro';
+import { testimonials } from '../data/content';
+import { mailto } from '../data/site';
+
+const visible = testimonials.filter((t) => !t.hidden);
+---
+
+<BaseLayout title="Erfahrungen & Erlebnisse" description="Persönliche Rückmeldungen von Menschen, die die energetischen Methoden von Heidi Rast erlebt haben.">
+  <PageHero
+    title="Erfahrungen & Erlebnisse"
+    lead="Jede energetische Behandlung ist so individuell wie der Mensch, der sie empfängt. Hier findest Du persönliche Rückmeldungen von Menschen, die meine Methoden ausprobiert haben – berührende Geschichten von Transformation, Erleichterung und neuer Lebensenergie."
+  />
+
+  <section class="section bg-cream">
+    <div class="container stack">
+      <p class="intro center">Lass Dich inspirieren und spüre, was möglich ist!</p>
+      <div class="wall">
+        {visible.map((t) => <Testimonial title={t.title} quote={t.quote} context={t.context} />)}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Vielleicht steht hier bald Deine Geschichte?"
+    text="Wenn Du spürst, dass es an der Zeit ist, etwas in Deinem Leben zu verändern, begleite ich Dich gern auf diesem Weg. Buche eine energetische Behandlung und erlebe selbst, wie sich Leichtigkeit, Heilung und neue Möglichkeiten entfalten können. Ich freue mich auf Dich!"
+    primary={{ label: 'Zu den Angeboten', href: '/angebote/' }}
+    secondary={{ label: 'Kontakt aufnehmen', href: mailto }}
+  />
+</BaseLayout>
+
+<style>
+  .intro {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(24px, 2.6vw, 32px);
+    color: var(--petrol-soft);
+  }
+
+  .wall {
+    columns: 3 300px;
+    column-gap: 24px;
+    margin-top: 16px;
+  }
+
+  .wall :global(.testimonial) {
+    margin-bottom: 24px;
+  }
+</style>

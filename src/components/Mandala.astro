@@ -1,0 +1,59 @@
+---
+// Das goldene Heil-Mandala – Signaturelement der Seite
+interface Props {
+  class?: string;
+  spin?: boolean;
+}
+
+const { class: className = '', spin = false } = Astro.props;
+
+const petals = Array.from({ length: 12 }, (_, i) => i * 30);
+const innerPetals = Array.from({ length: 8 }, (_, i) => 22.5 + i * 45);
+const dots = Array.from({ length: 12 }, (_, i) => {
+  const a = ((15 + i * 30) * Math.PI) / 180;
+  return { x: 200 + 170 * Math.sin(a), y: 200 - 170 * Math.cos(a) };
+});
+---
+
+<svg
+  class:list={['mandala', className, { spin }]}
+  viewBox="0 0 400 400"
+  aria-hidden="true"
+  focusable="false"
+>
+  <g fill="none" stroke="currentColor" stroke-width="0.9">
+    <circle cx="200" cy="200" r="196"></circle>
+    <circle cx="200" cy="200" r="170" stroke-dasharray="1.5 5"></circle>
+    <circle cx="200" cy="200" r="122"></circle>
+    <circle cx="200" cy="200" r="60"></circle>
+    <circle cx="200" cy="200" r="22"></circle>
+    {petals.map((deg) => <ellipse cx="200" cy="108" rx="22" ry="64" transform={`rotate(${deg} 200 200)`} />)}
+    {innerPetals.map((deg) => <ellipse cx="200" cy="152" rx="13" ry="34" transform={`rotate(${deg} 200 200)`} />)}
+  </g>
+  <g class="mandala-dots">
+    {dots.map((d) => <circle cx={d.x.toFixed(1)} cy={d.y.toFixed(1)} r="2.6" />)}
+    <circle cx="200" cy="200" r="5"></circle>
+  </g>
+</svg>
+
+<style>
+  .mandala {
+    color: var(--gold);
+    width: 100%;
+    height: auto;
+  }
+
+  .mandala-dots {
+    fill: var(--gold-light);
+  }
+
+  .spin {
+    animation: mandala-spin 240s linear infinite;
+  }
+
+  @keyframes mandala-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>

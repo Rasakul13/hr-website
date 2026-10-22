@@ -1,0 +1,230 @@
+---
+import { url } from '../../utils/url';
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import heidi from '../../assets/images/heidi.png';
+import { faqs } from '../../data/content';
+import { mailto, site } from '../../data/site';
+---
+
+<BaseLayout title="Kontakt & FAQ" description="Kontakt zu Heidi Rast per E-Mail, Kontaktformular oder Telegramgruppe – und Antworten auf häufige Fragen zur Fernbehandlung.">
+  <PageHero kicker="Kontakt & FAQ" title="Nimm Kontakt zu mir auf" lead="Ich freue mich auf eine E-Mail von dir!" />
+
+  <section class="section bg-cream">
+    <div class="container contact-grid">
+      <div class="stack">
+        <div class="card channel">
+          <Image src={heidi} alt="Heidi Rast" width={120} height={120} class="channel-portrait" />
+          <div class="stack">
+            <p class="kicker">E-Mail</p>
+            <a href={mailto} class="mail">{site.email}</a>
+          </div>
+        </div>
+
+        <div class="card channel-text stack">
+          <p class="kicker">Telegram</p>
+          <h2>Komm in meine Telegramgruppe</h2>
+          <p>
+            In meiner (kostenfreien) Telegramgruppe „Heidi’s Fernanwendungen – OnlinePraxis“ erfährst du Neuigkeiten und
+            erhältst tolle Angebote. Nur für Mitglieder gibt es immer wieder kostenlose Gruppen-Fernanwendungen.
+          </p>
+          <div class="btn-row">
+            <a href={site.telegram} class="btn btn-petrol" rel="noopener">Der Gruppe beitreten</a>
+          </div>
+        </div>
+      </div>
+
+      <form class="card form stack" id="kontaktformular" action={url("/kontakt.php")} method="post">
+        <h2>Schreibe mir über das Kontaktformular</h2>
+        <p class="muted">Ich beantworte deine Fragen in der Regel binnen 72 Stunden.</p>
+        <p class="form-error" id="form-error" role="alert" hidden>
+          Die Nachricht konnte nicht gesendet werden. Bitte prüfe deine Angaben oder schreib mir direkt an
+          <a href={mailto}>{site.email}</a>.
+        </p>
+
+        <label>
+          Name *
+          <input type="text" name="name" autocomplete="name" required />
+        </label>
+        <label>
+          E-Mail *
+          <input type="email" name="email" autocomplete="email" required />
+        </label>
+        <label>
+          Nachricht *
+          <textarea name="message" rows="6" required></textarea>
+        </label>
+        <!-- Spam-Falle: bleibt für Menschen unsichtbar -->
+        <label class="hp" aria-hidden="true">
+          Website
+          <input type="text" name="website" tabindex="-1" autocomplete="off" />
+        </label>
+
+        <p class="small">Es gilt unsere <a href={url("/datenschutz/")}>Datenschutzerklärung</a>. Pflichtfelder sind mit * gekennzeichnet.</p>
+        <button type="submit" class="btn btn-petrol">Nachricht senden</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="section bg-paper" id="faq">
+    <div class="container narrow stack">
+      <p class="kicker">FAQ</p>
+      <h2>Häufig gestellte Fragen</h2>
+      <div class="faqs">
+        {
+          faqs.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  if (new URLSearchParams(location.search).has('fehler')) {
+    document.getElementById('form-error')?.removeAttribute('hidden');
+  }
+</script>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+    gap: 24px;
+    align-items: start;
+  }
+
+  .channel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px;
+    padding: 28px;
+  }
+
+  .channel :global(.channel-portrait) {
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+  }
+
+  .mail {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 2.6vw, 30px);
+    word-break: break-word;
+  }
+
+  .channel-text {
+    padding: 32px;
+  }
+
+  .channel-text h2,
+  .form h2 {
+    font-size: clamp(26px, 2.6vw, 34px);
+  }
+
+  .form {
+    padding: clamp(26px, 3vw, 40px);
+    gap: 16px;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  input,
+  textarea {
+    font: inherit;
+    font-weight: 400;
+    font-size: 17px;
+    padding: 12px 14px;
+    border: 1px solid #c9bfae;
+    border-radius: 12px;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: 2px solid var(--gold);
+    outline-offset: 1px;
+    border-color: var(--gold);
+  }
+
+  .hp {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .form-error {
+    padding: 14px 18px;
+    border-radius: 12px;
+    background: #fbeae6;
+    color: #7a2e1e;
+    font-size: 15px;
+  }
+
+  .small {
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  .form .btn {
+    align-self: flex-start;
+  }
+
+  .faqs {
+    margin-top: 8px;
+    border-top: 1px solid var(--gold-line);
+  }
+
+  details {
+    border-bottom: 1px solid var(--gold-line);
+  }
+
+  summary {
+    position: relative;
+    padding: 22px 44px 22px 0;
+    font-family: var(--font-display);
+    font-size: clamp(21px, 2vw, 25px);
+    font-weight: 500;
+    line-height: 1.3;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::after {
+    content: '+';
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 28px;
+    color: var(--gold-ink);
+    transition: transform 0.2s;
+  }
+
+  details[open] summary::after {
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  details p {
+    padding: 0 0 22px;
+    color: var(--ink-soft);
+  }
+</style>
