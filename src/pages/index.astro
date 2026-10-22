@@ -73,7 +73,7 @@ const quotes = testimonials.filter((t) => !t.hidden).slice(0, 3);
           Coaching, ohne Ratschläge – nur reine, tiefgreifende Energiearbeit. Ich öffne Türen, die bisher für Dich
           verschlossen waren.
         </p>
-        <a href={url("/ueber-mich/")} class="more">Meine Reise zur energetischen Heilarbeit →</a>
+        <a href={url("/ueber-mich/")} class="more">Meine Reise zur energetischen Heilarbeit <span class="arrow" aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
@@ -130,7 +130,7 @@ const quotes = testimonials.filter((t) => !t.hidden).slice(0, 3);
           ))
         }
       </div>
-      <p class="center"><a href={url("/methoden/")} class="more">Alle Methoden im Überblick →</a></p>
+      <p class="center"><a href={url("/methoden/")} class="more">Alle Methoden im Überblick <span class="arrow" aria-hidden="true">→</span></a></p>
     </div>
   </section>
 
@@ -141,7 +141,7 @@ const quotes = testimonials.filter((t) => !t.hidden).slice(0, 3);
       <div class="quotes">
         {quotes.map((t) => <Testimonial title={t.title} quote={t.quote} />)}
       </div>
-      <p class="center"><a href={url("/erfahrungen/")} class="more">Alle Erfahrungen lesen →</a></p>
+      <p class="center"><a href={url("/erfahrungen/")} class="more">Alle Erfahrungen lesen <span class="arrow" aria-hidden="true">→</span></a></p>
     </div>
   </section>
 
@@ -251,6 +251,30 @@ const quotes = testimonials.filter((t) => !t.hidden).slice(0, 3);
   .more {
     font-weight: 500;
     color: var(--petrol-soft);
+    text-decoration-color: var(--gold-line);
+    transition:
+      color 0.2s ease,
+      text-decoration-color 0.2s ease;
+  }
+
+  .more:hover {
+    color: var(--gold-ink);
+    text-decoration-color: var(--gold);
+  }
+
+  .more .arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+
+  .more:hover .arrow {
+    transform: translateX(4px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .more .arrow {
+      transition: none;
+    }
   }
 
   @media (max-width: 820px) {
