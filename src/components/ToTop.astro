@@ -1,0 +1,140 @@
+---
+// Knopf zurück zum Seitenanfang: erscheint nach etwa einer Bildschirmhöhe. Der gepunktete
+// Goldring (wie um die Bilder) füllt sich beim Scrollen und zeigt den Lesefortschritt.
+// Ohne JavaScript bleibt er unsichtbar.
+---
+
+<button type="button" class="to-top" aria-label="Zurück zum Seitenanfang">
+  <svg class="to-top-ring" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+    <circle class="to-top-track" cx="24" cy="24" r="22"></circle>
+    <circle class="to-top-bar" cx="24" cy="24" r="22"></circle>
+  </svg>
+  <svg class="to-top-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path d="M12 19V5M6 11l6-6 6 6"></path>
+  </svg>
+</button>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('.to-top');
+  const bar = button?.querySelector<SVGCircleElement>('.to-top-bar');
+
+  if (button && bar) {
+    const length = 2 * Math.PI * 22;
+    bar.style.strokeDasharray = `${length}`;
+
+    let queued = false;
+    const update = () => {
+      queued = false;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+      bar.style.strokeDashoffset = `${length * (1 - progress)}`;
+      button.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.9);
+    };
+    const queue = () => {
+      if (!queued) {
+        queued = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+    update();
+
+    button.addEventListener('click', () => {
+      // sanft oder sofort, je nach scroll-behavior in global.css („Bewegung reduzieren“)
+      window.scrollTo({ top: 0 });
+      // Tastatur-Fokus mit nach oben nehmen, statt ihn am verschwindenden Knopf zu verlieren
+      document.querySelector<HTMLElement>('.brand')?.focus({ preventScroll: true });
+    });
+  }
+</script>
+
+<style>
+  .to-top {
+    position: fixed;
+    right: calc(var(--to-top-offset) + env(safe-area-inset-right, 0px));
+    bottom: calc(var(--to-top-offset) + env(safe-area-inset-bottom, 0px));
+    z-index: 30;
+    display: grid;
+    place-items: center;
+    width: var(--to-top-size);
+    height: var(--to-top-size);
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--petrol);
+    color: var(--gold);
+    box-shadow: 0 10px 28px rgba(11, 46, 51, 0.22);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    /* versteckt: nicht sichtbar und nicht per Tab erreichbar */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(14px);
+    transition:
+      opacity 0.35s ease,
+      transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+      visibility 0s linear 0.45s,
+      color 0.2s ease;
+  }
+
+  .to-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s;
+  }
+
+  .to-top:hover {
+    color: var(--gold-light);
+  }
+
+  /* Fokusring rund lassen (global.css setzt sonst 4px Radius) */
+  .to-top:focus-visible {
+    border-radius: 50%;
+  }
+
+  .to-top-ring {
+    position: absolute;
+    inset: 3px;
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+    transform: rotate(-90deg);
+    fill: none;
+  }
+
+  .to-top-track {
+    stroke: rgba(205, 170, 94, 0.55);
+    stroke-width: 1.2;
+    stroke-dasharray: 1.2 4.2;
+    stroke-linecap: round;
+  }
+
+  .to-top-bar {
+    stroke: var(--gold);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+  }
+
+  .to-top-arrow {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.25s ease;
+  }
+
+  .to-top:hover .to-top-arrow {
+    transform: translateY(-2px);
+  }
+
+  @media print {
+    .to-top {
+      display: none;
+    }
+  }
+</style>

@@ -118,4 +118,12 @@ import { legalNav, mailto, nav, site } from '../data/site';
     display: flex;
     gap: 20px;
   }
+
+  /* Platz für den Nach-oben-Knopf, der am Seitenende sonst über „Datenschutz“ liegt.
+     Ab 1280px Breite liegt der Knopf ohnehin neben dem Inhalt. */
+  @media (max-width: 1280px) {
+    .footer-bottom {
+      padding-right: calc(var(--to-top-offset) + var(--to-top-size) + 16px + env(safe-area-inset-right, 0px));
+    }
+  }
 </style>

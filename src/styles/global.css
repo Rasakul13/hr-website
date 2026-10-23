@@ -24,6 +24,10 @@
   --gutter: clamp(16px, 4vw, 48px);
   --section-y: clamp(64px, 9vw, 120px);
 
+  /* Nach-oben-Knopf (ToTop.astro), auch für den Freiraum im Footer */
+  --to-top-size: 54px;
+  --to-top-offset: clamp(16px, 2.5vw, 28px);
+
   --sparkle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0 L13.4 10.6 L24 12 L13.4 13.4 L12 24 L10.6 13.4 L0 12 L10.6 10.6 Z'/%3E%3C/svg%3E");
 }
 

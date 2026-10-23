@@ -53,11 +53,13 @@ export const methodGroups = [
         text: 'Stärkung der inneren und äußeren Aufrichtung, Auflösung energetischer Blockaden entlang der Wirbelsäule.',
       },
       {
-        name: 'Energetisches Facelift (auch remote)',
+        name: 'Energetisches Facelift',
+        source: 'auch remote',
         text: 'Eine wohltuende Verjüngungsenergie, die dich innerlich wie äußerlich strahlen lässt.',
       },
       {
-        name: 'Japanisches Heilströmen (Jin Shin Jyutsu)',
+        name: 'Japanisches Heilströmen',
+        source: 'Jin Shin Jyutsu',
         text: 'Harmonisierung des Energieflusses im Körper durch sanftes Halten bestimmter Punkte.',
       },
       {
