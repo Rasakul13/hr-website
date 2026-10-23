@@ -56,6 +56,9 @@ const quotes = testimonials.filter((t) => !t.hidden).slice(0, 3);
   <section class="section bg-cream">
     <div class="container intro-grid">
       <div class="portrait">
+        <svg class="portrait-ring" viewBox="0 0 400 400" aria-hidden="true" focusable="false">
+          <circle cx="200" cy="200" r="198.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="1.5 6" stroke-linecap="round"></circle>
+        </svg>
         <Image src={introBild} alt="Frau mit geschlossenen Augen in hellem, warmem Licht" />
       </div>
       <div class="stack">
@@ -216,22 +219,38 @@ const quotes = testimonials.filter((t) => !t.hidden).slice(0, 3);
   /* Intro */
   .intro-grid {
     display: grid;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    grid-template-columns: auto minmax(0, 1fr);
     align-items: center;
     gap: clamp(32px, 6vw, 88px);
   }
 
+  /* Rundes Bild mit feinem Goldring wie bei „Ablauf & Buchung“, dazu ein gepunkteter
+     Außenring. Breite bleibt unter der Originalgröße des Bildes (331px), damit es scharf bleibt. */
   .portrait {
-    max-width: 400px;
-    justify-self: center;
+    position: relative;
+    width: clamp(260px, 28vw, 360px);
+    padding: 14px;
+  }
+
+  .portrait-ring {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--gold);
   }
 
   .portrait :global(img) {
     display: block;
     width: 100%;
     height: auto;
-    border-radius: var(--radius);
-    box-shadow: 0 16px 40px rgba(18, 54, 60, 0.09);
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid var(--gold-line);
+    padding: 10px;
+    /* nimmt dem Bild den kühlen Lila-Stich */
+    filter: sepia(0.22) saturate(0.95) brightness(1.02);
   }
 
   .intro-title {
@@ -283,7 +302,8 @@ const quotes = testimonials.filter((t) => !t.hidden).slice(0, 3);
     }
 
     .portrait {
-      max-width: 280px;
+      width: 280px;
+      justify-self: center;
     }
   }
 
