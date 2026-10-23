@@ -29,7 +29,8 @@ export const methodGroups = [
         text: 'Kraftvolle energetische Symbole und Werkzeuge, die dich dabei unterstützen, neue Realitäten für dich zu erschaffen und Heilung einzuladen.',
       },
       {
-        name: 'Decrees (Affirmationen der neuen Energie)',
+        name: 'Decrees',
+        source: 'Affirmationen der neuen Energie',
         text: 'Hochschwingende kraftvolle Sätze, die ich oft als Audio für dich aufnehme, um neue Frequenzen in dein Leben zu bringen.',
       },
       {
