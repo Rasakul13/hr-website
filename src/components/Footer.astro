@@ -4,6 +4,9 @@ import { Image } from 'astro:assets';
 import logo from '../assets/images/logo.png';
 import Mandala from './Mandala.astro';
 import { legalNav, mailto, nav, site } from '../data/site';
+
+// Slogan im Footer immer nach „für“ umbrechen
+const [taglineStart, taglineEnd] = site.tagline.split(' für ');
 ---
 
 <footer class="site-footer bg-deep">
@@ -11,7 +14,9 @@ import { legalNav, mailto, nav, site } from '../data/site';
   <div class="container footer-grid">
     <div class="footer-brand stack">
       <Image src={logo} alt="Heidi Rast – Magische Heilerin" width={96} height={96} class="footer-logo" />
-      <p class="muted">{site.tagline}.</p>
+      <p class="muted">
+        {taglineEnd ? <>{taglineStart} für<br />{taglineEnd}.</> : <>{site.tagline}.</>}
+      </p>
     </div>
 
     <nav aria-label="Seiten" class="footer-col">
