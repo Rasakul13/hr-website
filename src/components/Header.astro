@@ -190,6 +190,15 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
       border-radius: 999px;
       cursor: pointer;
       font-size: 15px;
+      /* Kein graues/blaues Tipp-Rechteck und keine Textmarkierung beim Antippen */
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    /* Fokus-Ring folgt der Pillenform statt des globalen 4px-Radius */
+    .nav-mobile summary:focus-visible {
+      border-radius: 999px;
     }
 
     .nav-mobile summary::-webkit-details-marker {
@@ -208,13 +217,15 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
       flex-shrink: 0;
     }
 
+    /* Linien als Rahmen statt Fläche: Browser runden Rahmenbreiten auf ganze
+       Gerätepixel ab, so sind alle drei Striche gleich dick – auch bei krummen
+       Pixeldichten wie 2,625. 1.2px ergibt dort 3 Gerätepixel, bei 2x bleibt es bei 2. */
     .burger span {
       position: absolute;
       left: 0;
       width: 100%;
-      height: 1px;
-      border-radius: 1px;
-      background: var(--gold);
+      height: 0;
+      border-top: 1.2px solid var(--gold);
       transition:
         transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
         opacity 0.2s ease;
