@@ -40,6 +40,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    {/* Bilder erst ausblenden, wenn JavaScript läuft und sie wieder einblenden kann */}
+    <script is:inline>document.documentElement.classList.add('js');</script>
   </head>
   <body>
     <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
@@ -50,6 +52,23 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <Footer />
   </body>
 </html>
+
+<script>
+  // Bilder weich einblenden, sobald sie geladen sind (siehe „Bilder weich laden“ in global.css)
+  const reveal = (img: HTMLImageElement) => {
+    const target = img.closest<HTMLElement>('.soft-image') ?? img;
+    const show = () => target.classList.add('is-loaded');
+
+    if (img.complete && img.naturalWidth > 0) {
+      show();
+    } else {
+      img.addEventListener('load', show, { once: true });
+      img.addEventListener('error', show, { once: true });
+    }
+  };
+
+  document.querySelectorAll<HTMLImageElement>('.soft-image img, img.fade-in').forEach(reveal);
+</script>
 
 <style is:global>
   .skip-link {

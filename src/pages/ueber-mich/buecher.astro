@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import SoftImage from '../../components/SoftImage.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import buchNacken from '../../assets/images/buch-nacken.jpg';
@@ -40,7 +40,7 @@ const books = [
       {
         books.map((b, i) => (
           <article class:list={['book card', { flip: i % 2 === 1 }]}>
-            <Image src={b.image} alt={b.alt} widths={[420, 840]} sizes="(max-width: 820px) 100vw, 460px" />
+            <SoftImage src={b.image} alt={b.alt} widths={[420, 840]} sizes="(max-width: 820px) 100vw, 460px" />
             <div class="stack">
               <h2>{b.title}</h2>
               {b.text.map((p) => <p set:html={p} />)}
@@ -71,12 +71,11 @@ const books = [
     padding: clamp(22px, 3vw, 40px);
   }
 
-  .book.flip > :global(img) {
+  .book.flip > :global(.soft-image) {
     order: 2;
   }
 
-  .book :global(img) {
-    width: 100%;
+  .book :global(.soft-image) {
     border-radius: 18px;
   }
 
@@ -96,7 +95,7 @@ const books = [
       grid-template-columns: minmax(0, 1fr);
     }
 
-    .book.flip > :global(img) {
+    .book.flip > :global(.soft-image) {
       order: 0;
     }
   }

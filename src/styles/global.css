@@ -384,6 +384,48 @@ a:hover {
   font-style: italic;
 }
 
+/* ---------- Bilder weich laden ---------- */
+/* Fotos (SoftImage.astro): verschwommene Vorschau, darüber blendet das Bild ein.
+   Ohne JavaScript (keine Klasse .js) sind die Bilder einfach sofort sichtbar. */
+.soft-image {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.soft-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--placeholder) center / cover no-repeat;
+  /* erst ausblenden, wenn das Bild ganz da ist (wichtig bei transparenten Bildern) */
+  transition: opacity 0.3s ease 0.9s;
+}
+
+.soft-image img {
+  position: relative;
+  width: 100%;
+  transition: opacity 0.9s ease;
+}
+
+.js .soft-image:not(.is-loaded) img {
+  opacity: 0;
+}
+
+.soft-image.is-loaded::before {
+  opacity: 0;
+}
+
+/* Hintergrundbilder ohne Vorschau (Glitzer): nur sanft einblenden */
+.fade-in {
+  transition: opacity 0.9s ease;
+}
+
+.js .fade-in:not(.is-loaded) {
+  opacity: 0 !important;
+}
+
 /* ---------- Bewegung reduzieren ---------- */
 @media (prefers-reduced-motion: reduce) {
   html {

@@ -1,6 +1,6 @@
 ---
 import { url } from '../../utils/url';
-import { Image } from 'astro:assets';
+import SoftImage from '../../components/SoftImage.astro';
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
@@ -24,7 +24,7 @@ const kicker = [post.data.category, fmt.format(post.data.date)].filter(Boolean).
   <article class="section bg-paper">
     <div class="container narrow">
       <figure class="cover">
-        <Image src={post.data.cover} alt={post.data.coverAlt} widths={[780, 1560]} sizes="(max-width: 860px) 100vw, 780px" />
+        <SoftImage src={post.data.cover} alt={post.data.coverAlt} widths={[780, 1560]} sizes="(max-width: 860px) 100vw, 780px" priority />
         {post.data.coverNote && <figcaption>{post.data.coverNote}</figcaption>}
       </figure>
       <div class="prose">
@@ -46,8 +46,7 @@ const kicker = [post.data.category, fmt.format(post.data.date)].filter(Boolean).
     margin: 0 0 40px;
   }
 
-  .cover :global(img) {
-    width: 100%;
+  .cover :global(.soft-image) {
     border-radius: 20px;
   }
 

@@ -17,7 +17,7 @@ const { kicker, title, titleEm, lead, compact = false } = Astro.props;
 ---
 
 <section class:list={['page-hero bg-petrol', { compact }]}>
-  <Image src={glitzer} alt="" class="hero-glitter" widths={[800, 1600]} sizes="100vw" loading="eager" />
+  <Image src={glitzer} alt="" class="hero-glitter fade-in" widths={[800, 1600]} sizes="100vw" loading="eager" />
   <Bokeh />
   <div class="container hero-grid">
     <div class="hero-text stack">

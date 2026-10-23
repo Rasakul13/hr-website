@@ -8,6 +8,7 @@ import Sparkle from '../components/Sparkle.astro';
 import Symbol from '../components/Symbol.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Testimonial from '../components/Testimonial.astro';
+import SoftImage from '../components/SoftImage.astro';
 import glitzer from '../assets/images/glitzer.jpg';
 import introBild from '../assets/images/intro-licht.png';
 import { mailto, site } from '../data/site';
@@ -33,7 +34,7 @@ const quotes = testimonials.filter((t) => !t.hidden).slice(0, 3);
 <BaseLayout>
   <!-- Hero -->
   <section class="home-hero bg-petrol">
-    <Image src={glitzer} alt="" class="hero-glitter" widths={[800, 1600]} sizes="100vw" loading="eager" />
+    <Image src={glitzer} alt="" class="hero-glitter fade-in" widths={[800, 1600]} sizes="100vw" loading="eager" />
     <Bokeh />
     <div class="container hero-grid">
       <div class="stack hero-text">
@@ -59,7 +60,9 @@ const quotes = testimonials.filter((t) => !t.hidden).slice(0, 3);
         <svg class="portrait-ring" viewBox="0 0 400 400" aria-hidden="true" focusable="false">
           <circle cx="200" cy="200" r="198.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="1.5 6" stroke-linecap="round"></circle>
         </svg>
-        <Image src={introBild} alt="Frau mit geschlossenen Augen in hellem, warmem Licht" />
+        <div class="portrait-frame">
+          <SoftImage src={introBild} alt="Frau mit geschlossenen Augen in hellem, warmem Licht" />
+        </div>
       </div>
       <div class="stack">
         <h2 class="intro-title">
@@ -240,17 +243,23 @@ const quotes = testimonials.filter((t) => !t.hidden).slice(0, 3);
     color: var(--gold);
   }
 
+  .portrait-frame {
+    border: 1px solid var(--gold-line);
+    border-radius: 50%;
+    padding: 10px;
+  }
+
+  .portrait :global(.soft-image) {
+    border-radius: 50%;
+    /* nimmt dem Bild den kühlen Lila-Stich, auch der Vorschau */
+    filter: sepia(0.22) saturate(0.95) brightness(1.02);
+  }
+
   .portrait :global(img) {
     display: block;
-    width: 100%;
     height: auto;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    border-radius: 50%;
-    border: 1px solid var(--gold-line);
-    padding: 10px;
-    /* nimmt dem Bild den kühlen Lila-Stich */
-    filter: sepia(0.22) saturate(0.95) brightness(1.02);
   }
 
   .intro-title {

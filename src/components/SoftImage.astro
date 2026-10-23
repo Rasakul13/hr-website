@@ -1,0 +1,17 @@
+---
+// Bild mit weichem Ladeübergang: Sofort ist eine stark verschwommene Vorschau in den
+// echten Farben zu sehen, das scharfe Bild blendet darüber ein, sobald es geladen ist.
+// Die Hülle .soft-image bestimmt die Form (Radius, Schatten), das Bild füllt sie aus.
+// Verhalten und Styles: global.css und BaseLayout.astro.
+import { Image } from 'astro:assets';
+import type { ComponentProps } from 'astro/types';
+import { blurPlaceholder } from '../utils/blurPlaceholder';
+
+type Props = ComponentProps<typeof Image>;
+
+const placeholder = await blurPlaceholder(Astro.props.src);
+---
+
+<span class="soft-image" style={placeholder ? `--placeholder: url("${placeholder}")` : undefined}>
+  <Image {...Astro.props} />
+</span>

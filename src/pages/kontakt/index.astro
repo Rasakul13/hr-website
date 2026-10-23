@@ -1,6 +1,6 @@
 ---
 import { url } from '../../utils/url';
-import { Image } from 'astro:assets';
+import SoftImage from '../../components/SoftImage.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import heidi from '../../assets/images/heidi.png';
@@ -15,7 +15,7 @@ import { mailto, site } from '../../data/site';
     <div class="container contact-grid">
       <div class="stack">
         <div class="card channel">
-          <Image src={heidi} alt="Heidi Rast" width={120} height={120} class="channel-portrait" />
+          <SoftImage src={heidi} alt="Heidi Rast" width={120} height={120} />
           <div class="stack">
             <p class="kicker">E-Mail</p>
             <a href={mailto} class="mail">{site.email}</a>
@@ -107,9 +107,9 @@ import { mailto, site } from '../../data/site';
     padding: 28px;
   }
 
-  .channel :global(.channel-portrait) {
+  .channel :global(.soft-image) {
     width: 104px;
-    height: 104px;
+    flex-shrink: 0;
     border-radius: 50%;
   }
 
