@@ -175,8 +175,13 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
       display: none;
     }
 
+    /* Kein graues/blaues Tipp-Rechteck und keine Textmarkierung beim Antippen –
+       gilt für den Menü-Button und alle Links im aufgeklappten Menü */
     .nav-mobile {
       display: block;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      user-select: none;
     }
 
     .nav-mobile summary {
@@ -190,10 +195,6 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
       border-radius: 999px;
       cursor: pointer;
       font-size: 15px;
-      /* Kein graues/blaues Tipp-Rechteck und keine Textmarkierung beim Antippen */
-      -webkit-tap-highlight-color: transparent;
-      -webkit-user-select: none;
-      user-select: none;
     }
 
     /* Fokus-Ring folgt der Pillenform statt des globalen 4px-Radius */
