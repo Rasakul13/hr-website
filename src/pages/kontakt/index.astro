@@ -3,22 +3,30 @@ import { url } from '../../utils/url';
 import SoftImage from '../../components/SoftImage.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
-import heidi from '../../assets/images/heidi.png';
+import heidi from '../../assets/images/heidi-kreis.jpg';
 import { faqs } from '../../data/content';
 import { mailto, site } from '../../data/site';
 ---
 
 <BaseLayout title="Kontakt & FAQ" description="Kontakt zu Heidi Rast per E-Mail, Kontaktformular oder Telegramgruppe – und Antworten auf häufige Fragen zur Fernbehandlung.">
-  <PageHero kicker="Kontakt & FAQ" title="Nimm Kontakt zu mir auf" lead="Ich freue mich auf eine E-Mail von dir!" />
+  <PageHero kicker="Kontakt & FAQ" title="Nimm Kontakt zu mir auf" />
 
   <section class="section bg-cream">
     <div class="container contact-grid">
       <div class="stack">
         <div class="card channel">
-          <SoftImage src={heidi} alt="Heidi Rast" width={120} height={120} />
-          <div class="stack">
+          <div class="channel-portrait">
+            <svg class="channel-ring" viewBox="0 0 150 150" aria-hidden="true" focusable="false">
+              <circle cx="75" cy="75" r="74.25" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="1.5 6" stroke-linecap="round"></circle>
+            </svg>
+            <div class="channel-frame">
+              <SoftImage src={heidi} alt="Heidi Rast" widths={[120, 240, 360]} sizes="120px" />
+            </div>
+          </div>
+          <div class="channel-body">
             <p class="kicker">E-Mail</p>
             <a href={mailto} class="mail">{site.email}</a>
+            <p class="mail-note">Ich freue mich auf eine E-Mail von dir!</p>
           </div>
         </div>
 
@@ -107,16 +115,57 @@ import { mailto, site } from '../../data/site';
     padding: 28px;
   }
 
-  .channel :global(.soft-image) {
-    width: 104px;
+  /* Rundes Foto mit feinem Goldring und gepunktetem Außenring wie auf der Startseite,
+     nur kleiner */
+  .channel-portrait {
+    position: relative;
+    width: 150px;
     flex-shrink: 0;
+    padding: 8px;
+  }
+
+  .channel-ring {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--gold);
+  }
+
+  .channel-frame {
+    border: 1px solid var(--gold-line);
     border-radius: 50%;
+    padding: 6px;
+  }
+
+  .channel-portrait :global(.soft-image) {
+    border-radius: 50%;
+  }
+
+  .channel-portrait :global(img) {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  /* Überschrift und Adresse eng beieinander, als ein Block */
+  .channel-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
   }
 
   .mail {
     font-family: var(--font-display);
     font-size: clamp(24px, 2.6vw, 30px);
+    line-height: 1.25;
     word-break: break-word;
+  }
+
+  .mail-note {
+    margin-top: 4px;
+    font-size: 16px;
+    color: var(--ink-soft);
   }
 
   .channel-text {
